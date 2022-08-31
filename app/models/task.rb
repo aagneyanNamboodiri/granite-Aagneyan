@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
+  before_validation :set_title
   MAX_TITLE_LENGTH = 125
   validates :title, presence: true, length: { maximum: MAX_TITLE_LENGTH }
   validates :slug, uniqueness: true
@@ -9,6 +10,10 @@ class Task < ApplicationRecord
   before_create :set_slug
 
   private
+
+    def set_title
+      self.title = "Pay electricity bill"
+    end
 
     def set_slug
       title_slug = title.parameterize
