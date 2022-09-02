@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    @current_user = nil
+    # any other session cleanup tasks can be done here...
+  end
+
   private
 
     def login_params
