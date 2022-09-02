@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user_using_x_auth_token
   rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :handle_validation_error
   rescue_from ActiveRecord::RecordNotUnique, with: :handle_record_not_unique
