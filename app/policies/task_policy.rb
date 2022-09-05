@@ -9,7 +9,26 @@ class TaskPolicy
   end
 
   def show?
-    # some condition which returns a boolean value
+    task.task_owner_id == user.id || task.assigned_user_id == user.id
+  end
+
+  def edit?
+    show?
+  end
+
+  # Only owner is allowed to update a task.
+  def update?
+    task.task_owner_id == user.id
+  end
+
+  # Every user can create a task, hence create? will always returns true.
+  def create?
+    true
+  end
+
+  # Only the user that has created the task, can delete it.
+  def destroy?
+    task.task_owner_id == user.id
   end
 
   class Scope
